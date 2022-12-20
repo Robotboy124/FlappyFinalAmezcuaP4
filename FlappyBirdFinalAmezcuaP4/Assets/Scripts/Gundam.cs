@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bird : MonoBehaviour
+public class Gundam : MonoBehaviour
 {
     //getting all components needed and setting variables
     private Animator animator;
@@ -21,11 +21,11 @@ public class Bird : MonoBehaviour
     //checking every frame for inputs
     void Update()
     {
-        // if the bird is still alive
+        // if the player is still alive
         if (alive == true)
         {
             //if the up arrow is pressed
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 // send signal to play fly animation
                 animator.SetTrigger("Fly");
@@ -37,14 +37,14 @@ public class Bird : MonoBehaviour
         }
     }
 
-    //if the bird collides with anything...
+    //if the player collides with anything...
     private void OnCollisionEnter2D(Collision2D other)
     {
-        //make speed zero, set alive to false, send animator trigger to play death, and tell game (add later)
+        //make speed zero, set alive to false, send animator trigger to play death, and tell game 
         rigidbody2d.velocity = Vector2.zero;
         alive = false;
         animator.SetTrigger("Die");
-        
+        GameControl.instance.GundamCrash();
     }
 
 }
